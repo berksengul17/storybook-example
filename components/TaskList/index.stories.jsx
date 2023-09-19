@@ -24,47 +24,64 @@ export default {
 
 export const Default = {
   decorators: [
-    (story) => (
-      <TaskProvider initialTasks={mockedTasks}>{story()}</TaskProvider>
+    (Story) => (
+      <TaskProvider>
+        <Story />
+      </TaskProvider>
     ),
   ],
 };
 
 export const WithPinnedTasks = {
   decorators: [
-    (story) => {
+    (Story) => {
       const pinnedTasks = [
         ...mockedTasks.slice(0, 5),
         { id: "6", title: "Task 6 (pinned)", state: "TASK_PINNED" },
       ];
 
-      return <TaskProvider initialTasks={pinnedTasks}>{story()}</TaskProvider>;
+      return (
+        <TaskProvider>
+          <Story />
+        </TaskProvider>
+      );
     },
   ],
 };
 
 export const WithArchivedTasks = {
   decorators: [
-    (story) => {
+    (Story) => {
       const archivedTasks = [
         ...mockedTasks.slice(0, 5),
         { id: "6", title: "Task 6 (archived)", state: "TASK_ARCHIVED" },
       ];
 
       return (
-        <TaskProvider initialTasks={archivedTasks}>{story()}</TaskProvider>
+        <TaskProvider>
+          <Story />
+        </TaskProvider>
       );
     },
   ],
 };
 
 export const Loading = {
-  args: {
-    isLoading: true,
-  },
-  decorators: [(story) => <TaskProvider>{story()}</TaskProvider>],
+  decorators: [
+    (Story) => (
+      <TaskProvider>
+        <Story />
+      </TaskProvider>
+    ),
+  ],
 };
 
 export const Empty = {
-  decorators: [(story) => <TaskProvider>{story()}</TaskProvider>],
+  decorators: [
+    (Story) => (
+      <TaskProvider>
+        <Story />
+      </TaskProvider>
+    ),
+  ],
 };
