@@ -1,14 +1,18 @@
-import { useContext } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { useContext, useEffect } from "react";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { TaskContext, TaskContextType } from "../../context/TaskProvider";
 import Task from "../Task";
 
-type TaskListProps = {
-  isLoading: boolean;
-};
+// type TaskListProps = {
+//   isLoading: boolean;
+// };
 
-function TaskList({ isLoading }: TaskListProps) {
-  const { tasks, updateTaskState } = useContext(TaskContext) as TaskContextType;
+// { isLoading }: TaskListProps
+
+function TaskList() {
+  const { tasks, updateTaskState, isLoading } = useContext(
+    TaskContext
+  ) as TaskContextType;
   const tasksInOrder = [
     ...tasks.filter((t) => t.state === "TASK_PINNED"),
     ...tasks.filter((t) => t.state !== "TASK_PINNED"),
@@ -28,7 +32,7 @@ function TaskList({ isLoading }: TaskListProps) {
 
   if (isLoading) {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Loading...</Text>
       </View>
     );
@@ -36,24 +40,26 @@ function TaskList({ isLoading }: TaskListProps) {
 
   if (tasks.length === 0) {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>You have no tasks</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
-      {tasksInOrder.map((task) => (
-        <Task
-          key={task.id}
-          task={task}
-          onPinTask={(taskId) => pinTask(taskId)}
-          onUnpinTask={(taskId) => unpinTask(taskId)}
-          onArchiveTask={(taskId) => archiveTask(taskId)}
-        />
-      ))}
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        {tasksInOrder.map((task) => (
+          <Task
+            key={task.id}
+            task={task}
+            onPinTask={(taskId) => pinTask(taskId)}
+            onUnpinTask={(taskId) => unpinTask(taskId)}
+            onArchiveTask={(taskId) => archiveTask(taskId)}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
