@@ -7,7 +7,7 @@ export type ThemeContextType = {
 
 type ThemeProviderProps = {
   children: ReactNode;
-  initialTheme: string;
+  initialTheme?: string;
 };
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
