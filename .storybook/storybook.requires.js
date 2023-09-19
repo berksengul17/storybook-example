@@ -49,6 +49,7 @@ try {
 
 const getStories = () => {
   return {
+    "./components/AddTaskModal/index.stories.jsx": require("../components/AddTaskModal/index.stories.jsx"),
     "./components/CustomButton/index.stories.jsx": require("../components/CustomButton/index.stories.jsx"),
     "./components/Task/index.stories.jsx": require("../components/Task/index.stories.jsx"),
     "./components/TaskList/index.stories.jsx": require("../components/TaskList/index.stories.jsx"),
